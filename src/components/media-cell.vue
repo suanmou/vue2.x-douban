@@ -38,6 +38,7 @@
       position: absolute;
       left: 0;
       right: 0;
+      top: 0;
       height: 1px;
       background: #eee;
       transform: scaleY(0.5);
@@ -70,22 +71,22 @@
     img {
       width: 100%;
     }
-    .v-cell-media-bottom {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      padding-top: 20px;
-      margin-top: 12px;
-      color: #bfbfbf;
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 1px;
-        background: #eee;
-      }
+  }
+  .v-cell-media-bottom {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 20px;
+    margin-top: 12px;
+    color: #bfbfbf;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 1px;
+      background: #eee;
     }
   }
 

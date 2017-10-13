@@ -20,25 +20,29 @@
         <div class="swiper-slide slide02" slot="swiper-con">Slide2</div>
         <div class="swiper-slide slide03" slot="swiper-con">Slide3</div>
       </v-swiper>
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
+      <v-cell title="提醒" icon>
+        <img src="../../assets/images/ic_mine_notification.png" alt="" slot="icon">
+        <a href="javascript:;" slot="cell-right"><img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>
+      </v-cell>
+      <v-cell title="设置">
+        <a href="javascript:;" slot="cell-right"><img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>
+      </v-cell>
+      <!--热门-->
+      <div class="hot-wrap">
+        <v-cell title="热门" label="hot">
+          <!--<a href="javascript:;" slot="cell-right">更多<img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>-->
+        </v-cell>
+        <v-cell-media :author="item.target.author.name" :column="item.source_cn" :img="item.target.cover_url" v-for="(item,index) in hotData"
+                      :key="item.id">
+          <span slot="title">{{item.title}}</span>
+          <span slot="describe">{{item.target.desc}}</span>
+        </v-cell-media>
+      </div>
 
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
-
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
-      <p>asdfgjjwwf</p>
 
     </div>
 
-    <!--<v-header title="豆瓣app" fixed>-->
-      <!--<a href="javascript:;" slot="left"><img class="v-icon-img" src="../../assets/images/ic_bar_back_green.png"/>返回</a>-->
-      <!--<a href="javascript:;" slot="right"><img class="v-icon-img margin-right-10" src="../../assets/images/ic_actionbar_search_icon.png"/></a>-->
-      <!--<a href="javascript:;" slot="right"><img class="v-icon-img" src="../../assets/images/ic_chat_green.png"/></a>-->
-    <!--</v-header>-->
+
 
   </div>
 </template>
@@ -46,12 +50,43 @@
 <script type="text/ecmascript-6">
   import vHeader from '@/components/header';
   import vSwiper from '@/components/swipe';
+  import vCell from '@/components/cell';
+  import vCellMedia from '@/components/media-cell';
   export default {
     name: 'index',
     components: {
       vHeader,
-      vSwiper
+      vSwiper,
+      vCell,
+      vCellMedia
     },
+    data () {
+      return {
+        recommendData: [],
+        hotData: []
+      }
+    },
+    created () {
+      this.fetchData();
+    },
+    methods: {
+      fetchData () {
+        this.axios.get('/api/homeData').then((responese) => {
+          let data = responese.data.data.recommend_feeds;
+          let recommend = [];
+          let hot = [];
+          for (var i in data){
+            if(data[i].card && data[i].card.name == '为你推荐') {
+              recommend.push(data[i]);
+            } else {
+              hot.push(data[i]);
+            }
+          }
+          this.recommendData = recommend;
+          this.hotData = hot;
+        });
+      }
+    }
 
   }
 </script>

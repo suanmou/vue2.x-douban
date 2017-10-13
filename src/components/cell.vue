@@ -38,7 +38,7 @@
 
 <style lang="less">
   .v-cell {
-    poosition: relative;
+    position: relative;
     padding: 10px 5px 10px 15px;
     display: flex;
     justify-content: space-between;
@@ -68,8 +68,8 @@
     }
   }
   .hot {
-    padding: 0 5px 0 15px;
-    height: 22px;
+    padding: 10px 5px 10px 15px;
+    /*height: 22px;*/
     &:after {
       content: '';
       position: absolute;

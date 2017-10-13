@@ -21,6 +21,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var homeData = require('../src/data/homeData.json')
+var apiRoutes = express.Router()
+apiRoutes.get('/homeData',function (req,res) {
+  res.json({
+    errno: 0,
+    data: homeData
+  })
+})
+app.use('/api',apiRoutes)
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
